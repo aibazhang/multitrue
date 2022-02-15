@@ -1,3 +1,4 @@
+/* eslint-disable comma-dangle */
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
 const app = require('./src/app');
