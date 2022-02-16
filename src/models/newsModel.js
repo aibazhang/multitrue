@@ -39,14 +39,6 @@ const newsSchema = mongoose.Schema({
   content: String,
 });
 
-newsSchema.post('save', function (error, doc, next) {
-  if (error.name === 'MongoBulkWriteError' && error.code === 11000) {
-    next(new Error('There was a duplicate key error'));
-  } else {
-    next();
-  }
-});
-
 newsSchema.index({ title: 1, category: -1 }, { unique: true });
 
 const News = mongoose.model('News', newsSchema);

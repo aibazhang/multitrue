@@ -6,7 +6,8 @@ exports.getHeadlines = async (req, res) => {
     const features = new APIFeatures(News.find(), req.query)
       .filter()
       .sort()
-      .limitFields();
+      .limitFields()
+      .limitRecords();
 
     const headlines = await features.query;
 

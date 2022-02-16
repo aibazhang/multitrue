@@ -1,1 +1,4 @@
 GET http://127.0.0.1:3001/api/v1/headlines/
+    # ?country=us
+    # &category=business
+    # &fields=title,author,publishedAt,category

@@ -34,6 +34,12 @@ class APIFeature {
     }
     return this;
   }
+
+  limitRecords() {
+    const limit = this.queryString.limit * 1 || 100;
+    this.query = this.query.limit(limit);
+    return this;
+  }
 }
 
 module.exports = APIFeature;
