@@ -3,7 +3,6 @@
     "DavidAnson.vscode-markdownlint",
     "humao.rest-client",
     "dbaeumer.vscode-eslint",
-    "Orta.vscode-jest",
     "afractal.node-essentials"
   ]
 }
