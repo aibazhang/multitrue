@@ -1,6 +1,6 @@
 on: push
 
-name: Deploy to STG
+name: CI
 
 jobs:
   test:

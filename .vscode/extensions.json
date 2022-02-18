@@ -1,0 +1,8 @@
+{
+  "recommendations": [
+    "DavidAnson.vscode-markdownlint",
+    "humao.rest-client",
+    "dbaeumer.vscode-eslint",
+    "afractal.node-essentials"
+  ]
+}
