@@ -1,27 +1,21 @@
 const News = require('../models/newsModel');
 const APIFeatures = require('../utils/apiFeatures');
+const catchAsync = require('../utils/catchAsync');
 
-exports.getHeadlines = async (req, res) => {
-  try {
-    const features = new APIFeatures(News.find(), req.query)
-      .filter()
-      .sort()
-      .limitFields()
-      .limitRecords();
+exports.getHeadlines = catchAsync(async (req, res) => {
+  const features = new APIFeatures(News.find(), req.query)
+    .filter()
+    .sort()
+    .limitFields()
+    .limitRecords();
 
-    const headlines = await features.query;
+  const headlines = await features.query;
 
-    res.status(200).json({
-      status: 'success',
-      results: headlines.length,
-      data: {
-        headlines,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err,
-    });
-  }
-};
+  res.status(200).json({
+    status: 'success',
+    results: headlines.length,
+    data: {
+      headlines,
+    },
+  });
+});
