@@ -1,7 +1,9 @@
 const dotenv = require('dotenv');
 const NewsAPI = require('newsapi');
 const mongoose = require('mongoose');
+const Cron = require('croner');
 const News = require('../src/models/newsModel');
+const dataImportConfig = require('../dataImportConfig.json');
 
 dotenv.config({ path: './config.env' });
 
@@ -23,13 +25,30 @@ async function saveDataToDB(cat, cou) {
     const { articles } = await newsapi.v2.topHeadlines({
       category: cat,
       country: cou,
+      pageSize: dataImportConfig.limit,
     });
     const news = articles.map((a) => ({ country: cou, category: cat, ...a }));
     await News.insertMany(news, { ordered: false });
-    console.log('Data successfully loaded!');
   } catch (error) {
-    console.log(error);
+    if (error.code === 11000) {
+      error.writeErrors.forEach((el) => {
+        const dubMessage = el.errmsg.match(/({.*?})/)[0];
+        console.log(`dup title x category: ${dubMessage}`);
+      });
+      console.log(`length ${error.writeErrors.length}`);
+    }
   }
 }
 
-saveDataToDB('business', 'us');
+Cron(
+  dataImportConfig.cronPattern,
+  {
+    maxRuns: Infinity,
+    timezone: dataImportConfig.timezone,
+  },
+  () => {
+    dataImportConfig.queries.forEach((el) => {
+      saveDataToDB(el.category, el.country);
+    });
+  }
+);
