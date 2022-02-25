@@ -4,3 +4,4 @@ config.env
 /dev-data
 globalConfig.json
 /coverage
+/http-rest

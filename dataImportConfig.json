@@ -1,7 +1,6 @@
 {
   "cronPattern": "0 0 8,12,19,22 * * *",
   "timezone": "Asia/Tokyo",
-  "sources": [],
   "limit": 100,
   "queries": [
     { "category": "business", "country": "us" },
