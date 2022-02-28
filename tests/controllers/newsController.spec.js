@@ -2,19 +2,18 @@
 const { mockReq, mockRes } = require('sinon-express-mock');
 const newsController = require('../../src/controllers/newsController');
 
-let mockError = false;
 jest.mock('../../src/models/newsModel', () => ({
   create: jest.fn((news) => {
-    if (mockError) {
-      return Promise.reject(Error, 'Mock Error');
-    }
     const _id = '12345';
     return Promise.resolve({ _id, ...news });
+  }),
+  findById: jest.fn((id) => {
+    Promise.resolve({ id });
   }),
 }));
 
 describe('../../src/controller/newsController', () => {
-  test('create', async () => {
+  it('should create', async () => {
     const testNews = {
       country: 'us',
       category: 'general',
@@ -39,30 +38,18 @@ describe('../../src/controller/newsController', () => {
     delete news._id;
     expect(news).toEqual(testNews);
   });
-});
 
-describe('Exception', () => {
-  test('mock error', async () => {
-    mockError = true;
-
-    const testNews = {
-      country: 'us',
-      category: 'general',
-      title: 'title1',
-      description: 'description!!',
-      url: 'news.com',
-      publishedAt: Date.now(),
-    };
-
+  it('should get', async () => {
     const request = {
-      body: testNews,
+      params: {
+        id: '1',
+      },
     };
 
     const req = mockReq(request);
     const res = mockRes();
 
-    await newsController.createNews(req, res);
-
-    expect(res.status.calledWith(404)).toBeTruthy();
+    await newsController.getNews(req, res);
+    expect(res.status.calledWith(200)).toBeTruthy();
   });
 });

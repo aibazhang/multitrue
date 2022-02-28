@@ -1,36 +1,23 @@
 const News = require('../models/newsModel');
+const catchAsync = require('../utils/catchAsync');
 
-exports.getNews = async (req, res) => {
-  try {
-    const headline = await News.findById(req.params.id);
+exports.getNews = catchAsync(async (req, res) => {
+  const headline = await News.findById(req.params.id);
 
-    res.status(200).json({
-      status: 'success',
-      data: {
-        headline,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err,
-    });
-  }
-};
+  res.status(200).json({
+    status: 'success',
+    data: {
+      headline,
+    },
+  });
+});
 
-exports.createNews = async (req, res) => {
-  try {
-    const newNews = await News.create(req.body);
-    res.status(201).json({
-      status: 'success',
-      data: {
-        newNews,
-      },
-    });
-  } catch (err) {
-    res.status(404).json({
-      status: 'fail',
-      message: err,
-    });
-  }
-};
+exports.createNews = catchAsync(async (req, res) => {
+  const newNews = await News.create(req.body);
+  res.status(201).json({
+    status: 'success',
+    data: {
+      newNews,
+    },
+  });
+});

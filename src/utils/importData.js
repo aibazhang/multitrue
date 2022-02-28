@@ -1,22 +1,10 @@
 const dotenv = require('dotenv');
 const NewsAPI = require('newsapi');
-const mongoose = require('mongoose');
 const Cron = require('croner');
-const News = require('../src/models/newsModel');
-const dataImportConfig = require('../dataImportConfig.json');
+const dataImportConfig = require('../../dataImportConfig.json');
+const News = require('../models/newsModel');
 
 dotenv.config({ path: './config.env' });
-
-const DB = process.env.DATABASE.replace(
-  '<PASSWORD>',
-  process.env.DATABASE_PASSWORD
-);
-
-mongoose
-  .connect(DB, {
-    socketTimeoutMS: 45000,
-  })
-  .then(() => console.log('DB connection successful!'));
 
 const newsapi = new NewsAPI(process.env.NEWSAPI_KEY);
 
@@ -52,7 +40,5 @@ const job = Cron(
     });
   }
 );
-
-console.log(job.running());
 
 module.exports = job;

@@ -1,0 +1,1 @@
+{"version":"1.0.0","name":"multi-language-news-api","dependencies":{"croner":{"version":"4.2.0"},"dotenv":{"version":"16.0.0"},"express":{"version":"4.17.3"},"mongoose":{"version":"6.2.2"},"morgan":{"version":"1.10.0"},"newsapi":{"version":"2.4.1"}}}
