@@ -3,7 +3,7 @@ const NewsAPI = require('newsapi');
 const mongoose = require('mongoose');
 const Cron = require('croner');
 const News = require('../src/models/newsModel');
-const dataImportConfig = require('../dataImportConfig.json');
+const dataImportConfig = require('../data-import-config.json');
 
 dotenv.config({ path: './config.env' });
 
