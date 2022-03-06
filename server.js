@@ -15,6 +15,8 @@ const DB = process.env.DATABASE.replace(
 mongoose
   .connect(DB, {
     socketTimeoutMS: 45000,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
   })
   .then(() => console.log('DB connection successful!'));
 
