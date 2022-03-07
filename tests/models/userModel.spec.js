@@ -19,35 +19,95 @@ describe('src/models/userModel', () => {
   });
 
   describe('normal', () => {
-    it('should create user signup infomation correctly', async () => {
-      const user = {
-        email: 'example@email.com',
-        name: 'name',
-        password: 'pass1234',
-        passwordConfirm: 'pass1234',
-        role: 'admin',
-      };
+    const user = {
+      email: 'example@email.com',
+      name: 'name',
+      password: 'pass1234',
+      passwordConfirm: 'pass1234',
+      role: 'admin',
+    };
+
+    beforeEach(async () => {
+      await User.deleteMany({});
       await User.create(user);
-      const result = (({ email, name, password, passwordConfirm, role }) => ({
-        email,
-        name,
-        password,
-        passwordConfirm,
-        role,
-      }))(await User.findOne({}).select('+password +passwordConfirm'));
-      expect(result).toEqual(user);
     });
+
+    it('should create user signup infomation correctly', async () => {
+      const result = await User.findOne({}).select(
+        '+password +passwordConfirm'
+      );
+      expect(result.email).toEqual(user.email);
+      expect(result.name).toEqual(user.name);
+      expect(result.role).toEqual(user.role);
+      expect(
+        result.correctPassword(user.password, result.password)
+      ).toBeTruthy();
+      expect(result.passwordConfirm).not.toBeDefined();
+    });
+
+    it('should create result token', async () => {
+      const result = await User.findOne({});
+      const resetToken = result.createPasswordResetToken();
+      expect(resetToken.length).toEqual(64);
+    });
+
     it('should have default value for field role and active', async () => {
-      const user = {
-        email: 'example@email.com',
-        name: 'name',
+      const user1 = {
+        email: 'example1@email.com',
+        name: 'name1',
         password: 'pass1234',
         passwordConfirm: 'pass1234',
       };
-      await User.create(user);
-      const result = await User.findOne({}).select('+active');
+      await User.create(user1);
+      const result = await User.findOne({ email: user1.email }).select(
+        '+active'
+      );
       await expect(result.role).toEqual('user');
-      await expect(result.active).toEqual(true);
+      await expect(result.active).toBeTruthy();
+    });
+
+    it('should hide unactive users', async () => {
+      const user1 = {
+        email: 'example2@email.com',
+        name: 'name2',
+        password: 'pass1234',
+        passwordConfirm: 'pass1234',
+        active: false,
+      };
+      await User.create(user1);
+      const result = await User.find({});
+      await expect(result.length).toEqual(1);
+    });
+
+    it('should judge changed password after', async () => {
+      const dateNow = Date.now();
+      const JWTTimeStamp = parseInt(dateNow / 1000, 10);
+      const userPast = {
+        email: 'example1@email.com',
+        name: 'name1',
+        password: 'pass1234',
+        passwordConfirm: 'pass1234',
+        passwordChangeAt: dateNow - 5000,
+      };
+
+      const userFuture = {
+        email: 'example2@email.com',
+        name: 'name2',
+        password: 'pass1234',
+        passwordConfirm: 'pass1234',
+        passwordChangeAt: dateNow + 5000,
+      };
+
+      await User.create(userPast);
+      await User.create(userFuture);
+
+      const result = await User.findOne({ email: user.email });
+      const resultPast = await User.findOne({ email: userPast.email });
+      const resultFuture = await User.findOne({ email: userFuture.email });
+
+      expect(result.changedPasswordAfter(JWTTimeStamp)).not.toBeTruthy();
+      expect(resultPast.changedPasswordAfter(JWTTimeStamp)).not.toBeTruthy();
+      expect(resultFuture.changedPasswordAfter(JWTTimeStamp)).toBeTruthy();
     });
   });
 
@@ -75,7 +135,7 @@ describe('src/models/userModel', () => {
       );
     });
     it('should unique email address', async () => {
-      const user = [
+      const users = [
         {
           email: 'example@email.com',
           name: 'name1',
@@ -89,7 +149,7 @@ describe('src/models/userModel', () => {
           passwordConfirm: 'pass1234',
         },
       ];
-      await expect(User.insertMany(user)).rejects.toThrow(/E11000/);
+      await expect(User.insertMany(users)).rejects.toThrow(/E11000/);
     });
     it('should valid password length', async () => {
       const user = {
