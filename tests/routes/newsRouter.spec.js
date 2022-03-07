@@ -11,11 +11,11 @@ jest.mock('express', () => ({
 jest.mock('../../src/controllers/newsController');
 
 describe('../../src/routes/newsRouter', () => {
-  test('when get /api/v1/news, getNews action will be called', () => {
+  it('should call getNews action', () => {
     expect(newsRouter.get).toHaveBeenCalledWith('/:id', newsController.getNews);
   });
 
-  test('when post /api/v1/news, createNews action will be called', () => {
+  it('should call createNews action', () => {
     expect(newsRouter.post).toHaveBeenCalledWith(
       '/',
       newsController.createNews
