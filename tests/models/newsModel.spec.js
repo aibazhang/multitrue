@@ -59,7 +59,7 @@ describe('src/models/newsModel', () => {
         url: 'news.com',
         publishedAt: Date.now(),
       };
-      await expect(News.create(invalidNews)).rejects.toThrow();
+      await expect(News.create(invalidNews)).rejects.toThrow(/E11000/);
     });
   });
 });

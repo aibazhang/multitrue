@@ -59,7 +59,9 @@ describe('src/models/userModel', () => {
         password: 'pass1234',
         passwordConfirm: 'passpass',
       };
-      await expect(User.create(user)).rejects.toThrow();
+      await expect(User.create(user)).rejects.toThrow(
+        /Password are not the same/
+      );
     });
     it('should valid email address', async () => {
       const user = {
@@ -68,7 +70,9 @@ describe('src/models/userModel', () => {
         password: 'pass1234',
         passwordConfirm: 'pass1234',
       };
-      await expect(User.create(user)).rejects.toThrow();
+      await expect(User.create(user)).rejects.toThrow(
+        /Please provide a valid email/
+      );
     });
     it('should unique email address', async () => {
       const user = [
@@ -85,7 +89,7 @@ describe('src/models/userModel', () => {
           passwordConfirm: 'pass1234',
         },
       ];
-      await expect(User.insertMany(user)).rejects.toThrow();
+      await expect(User.insertMany(user)).rejects.toThrow(/E11000/);
     });
     it('should valid password length', async () => {
       const user = {
@@ -94,7 +98,7 @@ describe('src/models/userModel', () => {
         password: 'pass123',
         passwordConfirm: 'pass123',
       };
-      await expect(User.create(user)).rejects.toThrow();
+      await expect(User.create(user)).rejects.toThrow(/shorter/);
     });
     it('should valid role', async () => {
       const user = {
@@ -104,7 +108,7 @@ describe('src/models/userModel', () => {
         passwordConfirm: 'pass1234',
         role: 'invalid-role',
       };
-      await expect(User.create(user)).rejects.toThrow();
+      await expect(User.create(user)).rejects.toThrow(/not a valid enum/);
     });
   });
 });
