@@ -22,8 +22,7 @@ jest.mock('../../src/models/newsModel', () => ({
 describe('../../src/controller/headlinesController', () => {
   it('should get', async () => {
     const request = {
-      query:
-        'country=us&category=business&fields=title,author,publishedAt,category&limit=10',
+      query: 'query',
     };
 
     const req = mockReq(request);

@@ -17,4 +17,11 @@ describe('../../src/routes/userRouter', () => {
       authController.signup
     );
   });
+
+  it('should call login', () => {
+    expect(userRouter.post).toHaveBeenCalledWith(
+      '/login',
+      authController.login
+    );
+  });
 });
