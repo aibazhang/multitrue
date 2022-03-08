@@ -179,3 +179,19 @@ exports.resetPassword = catchAsync(async (req, res, next) => {
 
   createSendToken(user, 200, res);
 });
+
+exports.updatePassword = catchAsync(async (req, res, next) => {
+  // get user from protect
+  const user = await User.findById(req.user.id).select('+password');
+
+  if (!(await user.correctPassword(req.body.passwordCurrent, user.password))) {
+    return next(new AppError('Your current password is wrong', 401));
+  }
+
+  user.password = req.body.password;
+  user.passwordConfirm = req.body.passwordConfirm;
+  this.passwordChangeAt = Date.now();
+  await user.save();
+
+  createSendToken(user, 200, res);
+});

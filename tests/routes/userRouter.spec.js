@@ -39,4 +39,12 @@ describe('../../src/routes/userRouter', () => {
       authController.resetPassword
     );
   });
+
+  it('should call updatePassword', () => {
+    expect(userRouter.post).toHaveBeenCalledWith(
+      '/updatePassword',
+      authController.protect,
+      authController.updatePassword
+    );
+  });
 });
