@@ -5,6 +5,7 @@ jest.mock('express', () => ({
   Router: () => ({
     get: jest.fn(),
     post: jest.fn(),
+    patch: jest.fn(),
   }),
 }));
 
@@ -29,6 +30,13 @@ describe('../../src/routes/userRouter', () => {
     expect(userRouter.post).toHaveBeenCalledWith(
       '/forgotPassword',
       authController.forgotPassword
+    );
+  });
+
+  it('should call resetPassword', () => {
+    expect(userRouter.patch).toHaveBeenCalledWith(
+      '/resetPassword/:token',
+      authController.resetPassword
     );
   });
 });
