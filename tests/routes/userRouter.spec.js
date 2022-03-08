@@ -24,4 +24,11 @@ describe('../../src/routes/userRouter', () => {
       authController.login
     );
   });
+
+  it('should call forgotPassword', () => {
+    expect(userRouter.post).toHaveBeenCalledWith(
+      '/forgotPassword',
+      authController.forgotPassword
+    );
+  });
 });
