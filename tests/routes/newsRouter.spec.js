@@ -1,5 +1,6 @@
 const newsRouter = require('../../src/routes/newsRouter');
 const newsController = require('../../src/controllers/newsController');
+const authController = require('../../src/controllers/authController');
 
 jest.mock('express', () => ({
   Router: () => ({
@@ -11,13 +12,18 @@ jest.mock('express', () => ({
 jest.mock('../../src/controllers/newsController');
 
 describe('../../src/routes/newsRouter', () => {
-  test('when get /api/v1/news, getNews action will be called', () => {
-    expect(newsRouter.get).toHaveBeenCalledWith('/:id', newsController.getNews);
+  it('should call getNews action', () => {
+    expect(newsRouter.get).toHaveBeenCalledWith(
+      '/:id',
+      authController.protect,
+      newsController.getNews
+    );
   });
 
-  test('when post /api/v1/news, createNews action will be called', () => {
+  it('should call createNews action', () => {
     expect(newsRouter.post).toHaveBeenCalledWith(
       '/',
+      authController.protect,
       newsController.createNews
     );
   });
