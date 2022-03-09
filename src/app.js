@@ -1,3 +1,4 @@
+const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const helmet = require('helmet');
@@ -12,6 +13,12 @@ const newsRouter = require('./routes/newsRouter');
 const userRouter = require('./routes/userRouter');
 
 const app = express();
+
+app.set('view engine', 'pug');
+app.set('views', path.join(__dirname, 'views'));
+
+// Serving staic files
+app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // Set security HTTP haeders
 app.use(helmet());
@@ -46,6 +53,12 @@ app.use((req, res, next) => {
 });
 
 // Mount Routes
+app.get('/', (req, res) => {
+  res.status(200).render('index', {
+    news: 'This is a news',
+  });
+});
+
 app.use('/api/v1/headlines', headlinesRouter);
 app.use('/api/v1/news', newsRouter);
 app.use('/api/v1/user', userRouter);

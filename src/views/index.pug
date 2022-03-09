@@ -1,0 +1,46 @@
+doctype html
+html(lang='en')
+
+    head
+        include includes/head.pug
+
+    body
+
+        include includes/navbar.pug
+
+        // Page Header
+        header.masthead(style="background-image: url('assets/img/us.avif')")
+            .container.position-relative.px-4.px-lg-5
+                .row.gx-4.gx-lg-5.justify-content-center
+                    .col-md-10.col-lg-8.col-xl-7
+                        .site-heading
+                            h1 🇺🇸
+                            span.subheading Latest headlines in the US
+
+        // Main Content
+        .container.px-4.px-lg-5
+            .row.gx-4.gx-lg-5.justify-content-center
+                .col-md-10.col-lg-8.col-xl-7.results
+
+                    // Post preview
+                    .post-preview
+                        a(href='post.html')
+                            h2.post-title
+                                | Man must explore, and this is exploration at its greatest
+                            h3.post-subtitle
+                                | Problems look mighty small from 150 miles up
+                        p.post-meta
+                            | Posted by
+                            a(href='#!')  Booker 
+                            | on September 24, 2021
+                    
+                    // Divider
+                    hr.my-4
+                    
+                    // Pager
+                    .d-flex.justify-content-end.mb-4
+                        a.btn.btn-primary.text-uppercase(href='#!') Page 2
+        
+        include includes/footer.pug
+
+        //- include includes/scripts.pug
