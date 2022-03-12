@@ -11,6 +11,7 @@ const globalErrorHandler = require('./controllers/errorController');
 const headlinesRouter = require('./routes/headlinesRouter');
 const newsRouter = require('./routes/newsRouter');
 const userRouter = require('./routes/userRouter');
+const viewRouter = require('./routes/viewRouter');
 
 const app = express();
 
@@ -53,12 +54,7 @@ app.use((req, res, next) => {
 });
 
 // Mount Routes
-app.get('/', (req, res) => {
-  res.status(200).render('index', {
-    news: 'This is a news',
-  });
-});
-
+app.get('/', viewRouter);
 app.use('/api/v1/headlines', headlinesRouter);
 app.use('/api/v1/news', newsRouter);
 app.use('/api/v1/user', userRouter);
