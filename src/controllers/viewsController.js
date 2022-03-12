@@ -31,22 +31,32 @@ exports.getHeadlinesJP = catchAsync(async (req, res) => {
   });
 });
 
-// exports.getHeadlines = catchAsync(async (req, res) => {
-//   const news = await News.find({ category: 'general', country: 'tw' })
-//     .sort('-publishedAt')
-//     .limit(10);
+exports.getHeadlinesTW = catchAsync(async (req, res) => {
+  const news = await News.find({ category: 'general', country: 'tw' })
+    .sort('-publishedAt')
+    .limit(10);
 
-//   res.status(200).render('tw', {
-//     news,
-//   });
-// });
+  res.status(200).render('index', {
+    countryMeta: {
+      flag: '🇹🇼',
+      fullName: 'Taiwan',
+      code: 'tw',
+    },
+    news,
+  });
+});
 
-// exports.getHeadlines = catchAsync(async (req, res) => {
-//   const news = await News.find({ category: 'general', country: 'cn' })
-//     .sort('-publishedAt')
-//     .limit(10);
+exports.getHeadlinesCN = catchAsync(async (req, res) => {
+  const news = await News.find({ category: 'general', country: 'cn' })
+    .sort('-publishedAt')
+    .limit(10);
 
-//   res.status(200).render('cn', {
-//     news,
-//   });
-// });
+  res.status(200).render('index', {
+    countryMeta: {
+      flag: '🇨🇳',
+      fullName: 'China',
+      code: 'cn',
+    },
+    news,
+  });
+});

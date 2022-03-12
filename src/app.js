@@ -54,7 +54,7 @@ app.use((req, res, next) => {
 });
 
 // Mount Routes
-app.get('/', viewRouter);
+app.get(['/', '/jp', '/tw', '/cn'], viewRouter);
 app.use('/api/v1/headlines', headlinesRouter);
 app.use('/api/v1/news', newsRouter);
 app.use('/api/v1/user', userRouter);
