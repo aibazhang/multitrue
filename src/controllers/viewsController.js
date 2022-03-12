@@ -9,7 +9,7 @@ exports.getHeadlinesUS = catchAsync(async (req, res) => {
   res.status(200).render('index', {
     countryMeta: {
       flag: '🇺🇸',
-      fullName: 'the US',
+      title: 'Top Stories',
       code: 'us',
     },
     news,
@@ -24,7 +24,7 @@ exports.getHeadlinesJP = catchAsync(async (req, res) => {
   res.status(200).render('index', {
     countryMeta: {
       flag: '🇯🇵',
-      fullName: 'Japan',
+      title: 'トップニュース',
       code: 'jp',
     },
     news,
@@ -39,7 +39,7 @@ exports.getHeadlinesTW = catchAsync(async (req, res) => {
   res.status(200).render('index', {
     countryMeta: {
       flag: '🇹🇼',
-      fullName: 'Taiwan',
+      title: '熱門新聞',
       code: 'tw',
     },
     news,
@@ -54,7 +54,7 @@ exports.getHeadlinesCN = catchAsync(async (req, res) => {
   res.status(200).render('index', {
     countryMeta: {
       flag: '🇨🇳',
-      fullName: 'China',
+      title: '热门新闻',
       code: 'cn',
     },
     news,
