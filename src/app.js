@@ -5,6 +5,7 @@ const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const mongoSantitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
+const compression = require('compression');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -46,6 +47,8 @@ app.use(xss());
 
 // Bod parser, reading data from body in req.body
 app.use(express.json({ limit: '10kb' }));
+
+app.use(compression());
 
 // Test middleware
 app.use((req, res, next) => {
