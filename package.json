@@ -4,6 +4,7 @@
   "description": "A multi-language news application",
   "main": "index.js",
   "scripts": {
+    "start": "node server.js",
     "start:dev": "nodemon server.js",
     "start:prod": "NODE_ENV=production nodemon server.js",
     "test": "jest --coverage --verbose"
@@ -12,6 +13,7 @@
   "license": "MIT",
   "dependencies": {
     "bcryptjs": "^2.4.3",
+    "compression": "^1.7.4",
     "croner": "^4.2.0",
     "dotenv": "^16.0.0",
     "express": "^4.17.2",
@@ -23,6 +25,7 @@
     "morgan": "^1.10.0",
     "newsapi": "^2.4.1",
     "nodemailer": "^6.7.2",
+    "pug": "^3.0.2",
     "validator": "^13.7.0",
     "xss-clean": "^0.1.1"
   },
@@ -44,5 +47,8 @@
     "prettier": "^2.5.1",
     "sinon": "^13.0.1",
     "sinon-express-mock": "^2.2.1"
+  },
+  "engines": {
+    "node": ">=10.0.0"
   }
 }

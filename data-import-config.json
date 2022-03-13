@@ -3,7 +3,9 @@
   "timezone": "Asia/Tokyo",
   "limit": 100,
   "queries": [
-    { "category": "business", "country": "us" },
-    { "category": "general", "country": "jp" }
+    { "category": "general", "country": "us" },
+    { "category": "general", "country": "jp" },
+    { "category": "general", "country": "tw" },
+    { "category": "general", "country": "cn" }
   ]
 }
