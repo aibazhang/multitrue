@@ -21,7 +21,7 @@ mongoose
   .then(() => console.log('DB connection successful!'));
 
 const port = process.env.PORT || 3000;
-app.listen(port, () => {
+const server = app.listen(port, () => {
   console.log(`App running on port ${port}`);
   if (importDataJob.running() && process.env.NODE_ENV === 'production') {
     console.log(`Import data job running`);
@@ -29,4 +29,11 @@ app.listen(port, () => {
   } else {
     console.warn('Import data job down');
   }
+});
+
+process.on('SIGTERM', () => {
+  console.log('SIGTERM RECEIVED. Shutting down gracefully');
+  server.close(() => {
+    console.log('💥💥 process terminated!');
+  });
 });
