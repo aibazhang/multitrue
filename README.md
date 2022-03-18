@@ -22,10 +22,10 @@ JWT_SECRET=YOUR_JWT_SECRET
 JWT_EXPIRES_IN=180d 
 JWT_COOKIE_EXPIRE_IN=90
 ```
-- Run application
+2. Run application
 
 ```
-2. Install dependencies
+# Install dependencies
 npm i
 
 # Run application
