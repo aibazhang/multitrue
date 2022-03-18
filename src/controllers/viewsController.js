@@ -1,10 +1,11 @@
 const News = require('../models/newsModel');
 const catchAsync = require('../utils/catchAsync');
+const viewConfig = require('../../view-config.json');
 
 exports.getHeadlinesUS = catchAsync(async (req, res) => {
   const news = await News.find({ category: 'general', country: 'us' })
     .sort('-publishedAt')
-    .limit(10);
+    .limit(viewConfig.limit);
 
   res.status(200).render('index', {
     countryMeta: {
@@ -19,7 +20,7 @@ exports.getHeadlinesUS = catchAsync(async (req, res) => {
 exports.getHeadlinesJP = catchAsync(async (req, res) => {
   const news = await News.find({ category: 'general', country: 'jp' })
     .sort('-publishedAt')
-    .limit(10);
+    .limit(viewConfig.limit);
 
   res.status(200).render('index', {
     countryMeta: {
@@ -34,7 +35,7 @@ exports.getHeadlinesJP = catchAsync(async (req, res) => {
 exports.getHeadlinesTW = catchAsync(async (req, res) => {
   const news = await News.find({ category: 'general', country: 'tw' })
     .sort('-publishedAt')
-    .limit(10);
+    .limit(viewConfig.limit);
 
   res.status(200).render('index', {
     countryMeta: {
@@ -49,7 +50,7 @@ exports.getHeadlinesTW = catchAsync(async (req, res) => {
 exports.getHeadlinesCN = catchAsync(async (req, res) => {
   const news = await News.find({ category: 'general', country: 'cn' })
     .sort('-publishedAt')
-    .limit(10);
+    .limit(viewConfig.limit);
 
   res.status(200).render('index', {
     countryMeta: {

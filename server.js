@@ -21,13 +21,13 @@ mongoose
   .then(() => console.log('DB connection successful!'));
 
 const port = process.env.PORT || 3000;
+
 const server = app.listen(port, () => {
   console.log(`App running on port ${port}`);
   if (importDataJob.running() && process.env.NODE_ENV === 'production') {
-    console.log(`Import data job running`);
-    console.log(`Next run on ${importDataJob.next()}`);
-  } else {
-    console.warn('Import data job down');
+    console.log(
+      `Import data job running... Next run on ${importDataJob.next()}`
+    );
   }
 });
 
