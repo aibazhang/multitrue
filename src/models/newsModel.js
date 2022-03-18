@@ -1,4 +1,6 @@
+/* eslint-disable func-names */
 const mongoose = require('mongoose');
+const viewConfig = require('../../view-config.json');
 
 const sourceSchema = mongoose.Schema({
   id: String,
@@ -40,6 +42,12 @@ const newsSchema = mongoose.Schema({
 });
 
 newsSchema.index({ title: 1, category: -1 }, { unique: true });
+
+newsSchema.pre(/^find/, function (next) {
+  const filterKeyword = viewConfig.filterKeyword.map((el) => new RegExp(el));
+  this.find({ title: { $not: { $in: filterKeyword } } });
+  next();
+});
 
 const News = mongoose.model('News', newsSchema);
 module.exports = News;
