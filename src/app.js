@@ -23,7 +23,15 @@ app.set('views', path.join(__dirname, 'views'));
 app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // Set security HTTP haeders
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: {
+      directives: {
+        'script-src': ["'self'", 'cdn.jsdelivr.net'],
+      },
+    },
+  })
+);
 
 // Development login
 if (process.env.NODE_ENV === 'development') {
