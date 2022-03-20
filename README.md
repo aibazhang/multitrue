@@ -2,6 +2,8 @@
 
 A multi-language news web application
 
+Support 🇺🇸🇯🇵🇹🇼🇨🇳🇰🇷
+
 ## Architecture
 
 - Back-end: [NodeJS](https://nodejs.org/en/) + [Express](https://expressjs.com/)
@@ -34,7 +36,7 @@ npm start run:dev
 
 ## License
 
-MIT
+[MIT](https://github.com/aibazhang/multitrue/blob/master/LICENSE)
 
 ---
 Powered by [startbootstrap-clean-blog](https://github.com/StartBootstrap/startbootstrap-clean-blog) and [NewsAPI](https://newsapi.org/)
