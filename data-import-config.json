@@ -6,6 +6,7 @@
     { "category": "general", "country": "us" },
     { "category": "general", "country": "jp" },
     { "category": "general", "country": "tw" },
-    { "category": "general", "country": "cn" }
+    { "category": "general", "country": "cn" },
+    { "category": "general", "country": "kr" }
   ]
 }

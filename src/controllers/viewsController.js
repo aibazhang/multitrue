@@ -61,3 +61,18 @@ exports.getHeadlinesCN = catchAsync(async (req, res) => {
     news,
   });
 });
+
+exports.getHeadlinesKR = catchAsync(async (req, res) => {
+  const news = await News.find({ category: 'general', country: 'kr' })
+    .sort('-publishedAt')
+    .limit(viewConfig.limit);
+
+  res.status(200).render('index', {
+    countryMeta: {
+      flag: '🇰🇷',
+      title: '주요 뉴스',
+      code: 'kr',
+    },
+    news,
+  });
+});
