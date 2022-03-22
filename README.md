@@ -1,4 +1,4 @@
-# Multitrue ([live](https://multitrue.herokuapp.com/))
+# Multitrue ([live](https://www.multitrue.news/))
 
 A multi-language news web application
 
