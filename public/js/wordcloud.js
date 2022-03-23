@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-undef
 const chart = echarts.init(document.getElementById('canvas'));
 
 const option = {
