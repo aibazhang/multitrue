@@ -25,11 +25,12 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 // Set security HTTP haeders
 app.use(
   helmet({
-    contentSecurityPolicy: {
-      directives: {
-        'script-src': ["'self'", 'cdn.jsdelivr.net'],
-      },
-    },
+    contentSecurityPolicy: false,
+    // contentSecurityPolicy: {
+    //   directives: {
+    //     'script-src': ["'self'", 'cdn.jsdelivr.net'],
+    //   },
+    // },
   })
 );
 

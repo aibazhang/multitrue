@@ -1,4 +1,8 @@
 {
+  "wordscloud": {
+    "minFrequency": 15,
+    "dateRangeDay": 7
+  },
   "limit": 20,
   "filterKeyword": [
     "厦门网",
@@ -480,6 +484,16 @@
     "- sports.cn",
     "- 江西新闻",
     "CPBL 中華職棒",
+    "CBS Philly",
+    "- 體育",
+    "ニフティニュース",
+    "東スポWeb",
+    "Game*Spark",
+    "大庆日报",
+    "广州市人民政府",
+    "国足",
+    "华夏经纬",
+    "广东省人民政府",
     "CBS Philly"
   ]
 }

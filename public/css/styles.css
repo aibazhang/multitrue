@@ -11651,3 +11651,39 @@ header.masthead .post-heading .meta a {
     font-size: 2.25rem;
   }
 }
+
+#canvas-container {
+  overflow-x: auto;
+  overflow-y: visible;
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.canvas {
+  display: block;
+  position: relative;
+  overflow: hidden;
+}
+
+.canvas.hide {
+  display: none;
+}
+
+#html-canvas > span {
+  transition: text-shadow 1s ease, opacity 1s ease;
+  -webkit-transition: text-shadow 1s ease, opacity 1s ease;
+  -ms-transition: text-shadow 1s ease, opacity 1s ease;
+}
+
+#html-canvas > span:hover {
+  text-shadow: 0 0 10px, 0 0 10px #fff, 0 0 10px #fff, 0 0 10px #fff;
+  opacity: 0.5;
+}
+
+#box {
+  pointer-events: none;
+  position: absolute;
+  box-shadow: 0 0 200px 200px rgba(255, 255, 255, 0.5);
+  border-radius: 50px;
+  cursor: pointer;
+}
