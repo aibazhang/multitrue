@@ -15,8 +15,9 @@ block content
     // Main Content
     .container.px-4.px-lg-5
         .row.gx-4.gx-lg-5.justify-content-center
-            #canvas-container
-                canvas#canvas.canvas(width="940", height="611")
+            if countryMeta.code === 'us'
+                #canvas-container
+                    canvas#canvas.canvas(width="940", height="611")
             .col-md-10.col-lg-8.col-xl-7.results
                 // Post preview
                 each nl in news
