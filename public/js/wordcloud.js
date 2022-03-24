@@ -24,9 +24,9 @@ const option = {
         fontWeight: 'bold',
         color() {
           return `rgb(${[
-            Math.round(Math.random() * 60),
-            Math.round(Math.random() * 160),
-            Math.round(Math.random() * 160),
+            Math.round(Math.random() * 20),
+            Math.round(Math.random() * 150),
+            Math.round(Math.random() * 180),
           ].join(',')})`;
         },
       },
