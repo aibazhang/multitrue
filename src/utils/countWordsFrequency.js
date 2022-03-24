@@ -9,10 +9,11 @@ const countWordsFrequency = (sentences) => {
 
   terms.forEach((e) => {
     if (!stopwords.stopwords.includes(e)) {
-      if (result[e]) {
-        result[e] += 1;
+      const name = e.toUpperCase();
+      if (result[name]) {
+        result[name] += 1;
       } else {
-        result[e] = 1;
+        result[name] = 1;
       }
     }
   });

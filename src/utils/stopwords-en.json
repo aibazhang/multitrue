@@ -1161,6 +1161,15 @@
     "z",
     "zero",
     "zi",
-    "zz"
+    "zz",
+    "sunday",
+    "monday",
+    "tuesday",
+    "wednesday",
+    "thursday",
+    "friday",
+    "saturday",
+    "week",
+    "day"
   ]
 }

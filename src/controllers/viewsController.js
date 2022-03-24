@@ -19,8 +19,15 @@ exports.getHeadlinesUS = catchAsync(async (req, res) => {
     .sort('-publishedAt')
     .limit(viewConfig.limit);
 
-  const wordsFrequency = calcWordFrequncyInArticles(news);
-
+  const articlesTitleDesc = await News.find({
+    category: 'general',
+    country: 'us',
+    publishedAt: {
+      $gt:
+        Date.now() - viewConfig.wordscloud.dateRangeDay * 24 * 60 * 60 * 1000,
+    },
+  }).select('title description');
+  const wordsFrequency = calcWordFrequncyInArticles(articlesTitleDesc);
   res.status(200).render('index', {
     countryMeta: {
       flag: '🇺🇸',
