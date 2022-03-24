@@ -1,4 +1,8 @@
 {
+  "wordscloud": {
+    "minFrequency": 3,
+    "dataRange": 7
+  },
   "limit": 20,
   "filterKeyword": [
     "厦门网",

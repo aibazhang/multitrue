@@ -5,10 +5,7 @@ const countWordsFrequency = (sentences) => {
   const result = {};
 
   // remove punctuation and split by space
-  const terms = sentences
-    .toLowerCase()
-    .match(/[a-zA-Z]+/g)
-    .sort();
+  const terms = sentences.toLowerCase().match(/[a-zA-Z]+/g);
 
   terms.forEach((e) => {
     if (!stopwords.stopwords.includes(e)) {
@@ -19,10 +16,12 @@ const countWordsFrequency = (sentences) => {
       }
     }
   });
-  return Object.entries(result).map(([key, value]) => ({
-    name: key,
-    value,
-  }));
+  return Object.entries(result)
+    .map(([key, value]) => ({
+      name: key,
+      value,
+    }))
+    .sort((a, b) => b.value - a.value);
 };
 
 module.exports = countWordsFrequency;

@@ -1,11 +1,25 @@
 const News = require('../models/newsModel');
 const catchAsync = require('../utils/catchAsync');
+const countWordsFrequency = require('../utils/countWordsFrequency');
 const viewConfig = require('../../view-config.json');
+
+const calcWordFrequncyInArticles = (obj) => {
+  // Calculate frequency of words in title and description
+  const titleTerms = obj.map((el) => el.title.split(' -')[0]);
+  const descTerms = obj
+    .filter((el) => el.description)
+    .map((el) => el.description);
+  return countWordsFrequency([...titleTerms, ...descTerms].join(' ')).filter(
+    (el) => el.value >= viewConfig.wordscloud.minFrequency
+  );
+};
 
 exports.getHeadlinesUS = catchAsync(async (req, res) => {
   const news = await News.find({ category: 'general', country: 'us' })
     .sort('-publishedAt')
     .limit(viewConfig.limit);
+
+  const wordsFrequency = calcWordFrequncyInArticles(news);
 
   res.status(200).render('index', {
     countryMeta: {
@@ -14,6 +28,7 @@ exports.getHeadlinesUS = catchAsync(async (req, res) => {
       code: 'us',
     },
     news,
+    wordsFrequency,
   });
 });
 
