@@ -1,26 +1,28 @@
-/*
+const stopwords = require('./stopwords-en.json');
 
-const wordsFrequency = (sentences) => {
-  const sentencesGroup = {};
+// English stopwords via https://gist.github.com/sebleier/554280
+const countWordsFrequency = (sentences) => {
+  const result = {};
 
-  // #1 remove punctuation and split by space
-  const newSentences = sentences
+  // remove punctuation and split by space
+  const terms = sentences
     .toLowerCase()
     .match(/[a-zA-Z]+/g)
     .sort();
 
-  newSentences.forEach((e) => {
-    !sentencesGroup[e] ? (sentencesGroup[e] = 1) : sentencesGroup[e]++;
+  terms.forEach((e) => {
+    if (!stopwords.stopwords.includes(e)) {
+      if (result[e]) {
+        result[e] += 1;
+      } else {
+        result[e] = 1;
+      }
+    }
   });
-
-  return {
-    total: newSentences.length,
-    data: sentencesGroup
-  };
+  return Object.entries(result).map(([key, value]) => ({
+    name: key,
+    value,
+  }));
 };
 
-module.exports = wordsFrequency;
-
-*/
-
-// English stopwords via https://gist.github.com/sebleier/554280
+module.exports = countWordsFrequency;
