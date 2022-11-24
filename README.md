@@ -36,6 +36,13 @@ npm i
 npm start run:dev
 ```
 
+## Redeploy to Heroku
+
+```
+git commit --allow-empty -m "Trigger Heroku deploy after enabling collectstatic"
+git push heroku main
+```
+
 ## License
 
 [MIT](https://github.com/aibazhang/multitrue/blob/master/LICENSE)
